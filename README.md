@@ -1,0 +1,1 @@
+# CODEX-MQL5-SZA_EMA_TripleTrend_H1
