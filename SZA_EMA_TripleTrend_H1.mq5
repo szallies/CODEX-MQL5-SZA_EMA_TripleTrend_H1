@@ -203,7 +203,10 @@ int OnInit()
         }
       //--- trim whitespace
       for(int i = 0; i < count; i++)
-         StringTrimRight(StringTrimLeft(symbols[i]));
+        {
+         StringTrimLeft(symbols[i]);
+         StringTrimRight(symbols[i]);
+        }
      }
    else
      {
@@ -1345,18 +1348,19 @@ void CheckDailyReset()
 //+------------------------------------------------------------------+
 //| Parse no-trade dates from input string                            |
 //+------------------------------------------------------------------+
-void ParseNoTradeDates(string input)
+void ParseNoTradeDates(string rawDates)
   {
-   if(StringLen(input) == 0)
+   if(StringLen(rawDates) == 0)
       return;
 
    string parts[];
-   int count = StringSplit(input, ';', parts);
+   int count = StringSplit(rawDates, ';', parts);
    ArrayResize(g_noTradeDates, count);
 
    for(int i = 0; i < count; i++)
      {
-      StringTrimRight(StringTrimLeft(parts[i]));
+      StringTrimLeft(parts[i]);
+      StringTrimRight(parts[i]);
       //--- Parse YYYY-MM-DD format
       g_noTradeDates[i] = StringToTime(parts[i]);
      }
@@ -1365,19 +1369,20 @@ void ParseNoTradeDates(string input)
 //+------------------------------------------------------------------+
 //| Parse no-trade hours from input string                            |
 //+------------------------------------------------------------------+
-void ParseNoTradeHours(string input)
+void ParseNoTradeHours(string rawHours)
   {
-   if(StringLen(input) == 0)
+   if(StringLen(rawHours) == 0)
       return;
 
    string parts[];
-   int count = StringSplit(input, ';', parts);
+   int count = StringSplit(rawHours, ';', parts);
    ArrayResize(g_noTradeHourStart, count);
    ArrayResize(g_noTradeHourEnd, count);
 
    for(int i = 0; i < count; i++)
      {
-      StringTrimRight(StringTrimLeft(parts[i]));
+      StringTrimLeft(parts[i]);
+      StringTrimRight(parts[i]);
       string hourParts[];
       if(StringSplit(parts[i], '-', hourParts) == 2)
         {
